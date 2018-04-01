@@ -12,12 +12,20 @@ class Stopwatch extends Component {
         this.decrementer = null;
     }
 
-    componentWillReceiveProps(nextProps) {
-        clearInterval(this.decrementer);
-        this.timerCountdown(nextProps.timer);
+    componentDidUpdate(prevProps) {
+        console.log('componentDidUpdate', this.props, prevProps);
+        if (prevProps.timer !== this.props.timer) {
+            this.updateTimer(this.props.timer);
+            clearInterval(this.decrementer);
+        }
+
+        if (this.state.stopwatch < 1) {
+            clearInterval(this.decrementer);
+            alert('Countdown finished');
+        }
     }
 
-    timerCountdown(newTimer) {
+    updateTimer(newTimer) {
 
         // First we update our stopwatch with new timer
         this.setState({
@@ -27,6 +35,11 @@ class Stopwatch extends Component {
     }
 
     startTimer() {
+        // If interval exists we clear it
+        if(this.decrementer) {
+            clearInterval(this.decrementer);
+        }
+
         // Then we decrement stopwatch by 1 every second
         this.decrementer = setInterval( () => {
             this.setState({
@@ -35,12 +48,6 @@ class Stopwatch extends Component {
         },1000);
     }
 
-    componentDidUpdate() {
-        if (this.state.stopwatch < 1) {
-            clearInterval(this.decrementer);
-            alert('Countdown finished');
-        }
-    }
 
     render() {
         return(

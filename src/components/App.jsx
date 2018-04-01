@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Clock from '../components/Clock.jsx';
 import Stopwatch from '../components/Stopwatch.jsx';
-import Newstopwatch from '../components/Newstopwatch.jsx';
 import '../css/App.css';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
@@ -77,15 +76,7 @@ class App extends Component {
                     </Button>
                 </Form>
 
-                {/*
-
                 <Stopwatch
-                    timer = {this.state.timer}
-                />
-
-                */}
-
-                <Newstopwatch
                     timer = {this.state.timer}
                 />
 
